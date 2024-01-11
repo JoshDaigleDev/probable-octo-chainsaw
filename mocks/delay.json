@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    {
+      "name": "delay",
+      "args": { "duration": 500 }
+    }
+  ],
+  "request": {
+    "method": "get",
+    "path": "/delay"
+  },
+  "response": {
+    "body": {
+      "token": "some-token-me"
+    }
+  }
+}

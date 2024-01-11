@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    {
+      "name": "timestamp",
+      "args": { "in": "milliseconds" }
+    }
+  ],
+  "request": {
+    "method": "GET",
+    "path": "/timestamp"
+  },
+  "response": {
+    "body": [
+      { "id": 1, "name": "John" },
+      { "id": 2, "name": "Marry", "created_at": "#timestamp#" }
+    ]
+  }
+}

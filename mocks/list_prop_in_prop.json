@@ -1,0 +1,31 @@
+{
+  "plugins": [
+    {
+      "name": "list",
+      "args": {
+        "count": 5,
+        "item": {
+          "name": "John",
+          "age": 35
+        },
+        "prop": "data.items"
+      }
+    }
+  ],
+  "request": {
+    "method": "GET",
+    "path": "/list?prop_in_prop"
+  },
+  "response": {
+    "body": {
+      "data": {
+        "items": []
+      },
+      "pagination": {
+        "page": 1,
+        "count": 10,
+        "size": 5
+      }
+    }
+  }
+}
