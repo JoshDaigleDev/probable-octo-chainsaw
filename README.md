@@ -15,7 +15,9 @@
 
 3. **Backend API Integration:**
     - The backend API is available at `localhost:3030` when you run the docker container.
-    - Implement functionality to fetch data from the API and display it in your Vue.js application. Have a look at the `mocks` folder to see what paths and requests are available. Feel free to add more data to these mocks.
+    - Implement functionality to fetch data from the API and display it in your Vue.js application. 
+      - Have a look at the `mocks` folder to see what paths and requests are available. Feel free to add more data to these mocks.
+      - New json files can be added with different mock data if you wish
     - Display the fetched data in a meaningful way, using appropriate Vue.js features (e.g., v-for for lists).
     - Implement a form or input component that allows users to interact with the backend API (e.g., submitting new data).
 
@@ -26,10 +28,11 @@
     - Implement pagination for the displayed data.
     - Add loading indicators to show when data is being fetched.
     - Implement a feature to filter or search through the displayed data.
-    - bonus, bonus points if the app can remember these next time
+    - bonus, bonus points if the app can remember search filters next time
     - At Elmer's we make use of `https://primevue.org/`. Would be nice if you could also use it.
+
 6. **Documentation:**
-    - Provide a brief README.md explaining how to run the Vue.js application locally.
+    - Update README.md explaining how to run the Vue.js and Backend applications locally.
     - Include any additional instructions for the developer to understand the code and project structure.
 
 **Evaluation Criteria:**
@@ -59,4 +62,5 @@ The assessment will be evaluated based on the following criteria:
 
 **Submission:**
 
-Use git and approach making changes to code the same way you would have in a professional environment. Add carls@elmersmfg.com as reviewer on a pull request
+Use git and approach making changes to code the same way you would have in a professional environment. 
+Add carls@elmersmfg.com as reviewer on a pull request
