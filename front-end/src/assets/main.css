@@ -1,0 +1,9 @@
+body {
+  min-height: 100vh;
+  font-size: 15px;
+  padding: 0px;
+  margin: 0px;
+  background-color: var(--white);
+  background-image: url("./bg-image.jpg");
+  text-rendering: optimizeLegibility;
+}
