@@ -1,25 +1,48 @@
 <script setup>
-import { computed } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
 import EndpointDropdown from './components/EndpointDropdown.vue';
+import Toast from 'primevue/toast';
+import { computed, watch, onMounted } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
 import { useAPIGatewayStore } from "./stores/apiGateway";
+import { useToast } from 'primevue/usetoast';
+
 const apiGateway = useAPIGatewayStore();
+const toast = useToast();
 
 const routes = computed(() => {
-  return apiGateway.routes
-})
+  return apiGateway.routes;
+});
 
 const startRoute = computed(() => {
-  return apiGateway.currentRoute
-})
+  return apiGateway.currentRoute;
+});
 
-function updateAPI(newRoute) {
-  apiGateway.fetchData(newRoute)
+const responseStatus = computed(() => {
+  return apiGateway.recentResponseStatus;
+});
+
+const updateAPI = (newRoute) => {
+  apiGateway.getData(newRoute);
 }
+
+watch(responseStatus, (newStatus) => {
+  console.log("watch: " + newStatus)
+  const catagory = parseInt(newStatus.status.toString().charAt(0), 10)
+  if (catagory === 2) {
+    toast.add({ severity: 'success', summary: 'Success!', detail: 'The API call succeeded.', life: 3000 });
+  } else if (catagory == 4 || catagory == 5) {
+    toast.add({ severity: 'error', summary: 'Failure!', detail: 'The API call failed.'});
+  }
+});
+
+onMounted(() => {
+  apiGateway.getData(startRoute.value);
+});
 </script>
 
 <template>
   <div class="app-wrapper">
+    <Toast />
     <div class="header-wrapper">
       <header class="navigation-wrapper">
         <h1 class="title">Joshua Daigle Assessment</h1>
@@ -83,11 +106,7 @@ function updateAPI(newRoute) {
   color: white;
   border-radius: 0.2rem;
 }
-.footer-wrapper{
-  grid-area: 12 / 1 / 12 / 6;
-  display:flex;
-  align-items: center;
-}
+
 .router-link:hover {
   background-color: --primary-color;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -96,6 +115,11 @@ function updateAPI(newRoute) {
   grid-area: 1 / 2 / 1 / 5;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.footer-wrapper{
+  grid-area: 12 / 1 / 12 / 6;
+  display:flex;
   align-items: center;
 }
 </style>

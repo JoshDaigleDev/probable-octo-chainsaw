@@ -1,10 +1,10 @@
 <script setup>
-import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
 import InputText from 'primevue/inputtext';
 import { FilterMatchMode } from 'primevue/api';
-import { computed, watch, reactive} from 'vue';
 import { useFilterStore } from "../stores/filter";
+import { computed, watch, reactive} from 'vue';
 
 const props = defineProps({
     data: { 

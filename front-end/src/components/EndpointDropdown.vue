@@ -1,6 +1,6 @@
 <script setup>
-import { watch, ref } from 'vue';
 import Dropdown from 'primevue/dropdown';
+import { watch, ref } from 'vue';
 
 const emit = defineEmits(['routeChanged']);
 const props = defineProps({

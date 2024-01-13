@@ -1,11 +1,11 @@
 import './assets/main.css'
 import 'primevue/resources/themes/bootstrap4-light-blue/theme.css'
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config'
 import ToastService from 'primevue/toastservice';
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
 const app = createApp(App);
 

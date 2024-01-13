@@ -1,6 +1,9 @@
 {
     "plugins": [
-        {"name": "random"}
+        {
+            "name": "random",
+            "args": { "duration": 2000 }
+        }
     ],
     "request": {
         "method": "GET",

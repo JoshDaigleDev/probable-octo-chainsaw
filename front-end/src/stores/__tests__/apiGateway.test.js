@@ -32,7 +32,7 @@ describe('API Gateway Store', () => {
     it('Loads Data', async () =>{
         const apiGateway = useAPIGatewayStore();
         expect(apiGateway.currentData).toStrictEqual([]);
-        await apiGateway.fetchData()
+        await apiGateway.fetchData("list?prop")
         expect(apiGateway.currentData).toStrictEqual(expectedData);
     })
 })

@@ -1,0 +1,16 @@
+{
+    "plugins": [
+        {
+            "name": "random",
+            "args": { "duration": 2000 }
+        }    
+    ],
+    "request": {
+        "method": "POST",
+        "path": "/random-words"
+    },
+    "response": {
+        "statusCode": 201,
+        "body": { "uuid": "#random:uuid#",  "words": "#random:word:count=2#", "enabled": "#random:bool#"}
+    }
+}
