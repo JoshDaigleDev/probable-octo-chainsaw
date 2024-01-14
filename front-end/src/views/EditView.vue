@@ -1,17 +1,17 @@
 <script setup>
 import ProgressSpinner from 'primevue/progressspinner';
-import AddItem from '../components/AddItem.vue'
-import { computed } from  "vue"
+import AddItem from '../components/AddItem.vue';
+import { computed } from  "vue";
 import { useAPIGatewayStore } from "../stores/apiGateway";
 
 const apiGateway = useAPIGatewayStore();
 
 const currentRoute = computed(() => {
-  return apiGateway.currentRoute
+  return apiGateway.currentRoute;
 });
 
 const title = computed(() => {
-  return `ADD ${currentRoute.value.name.toUpperCase()}`
+  return `ADD ${currentRoute.value.name.toUpperCase()}`;
 });
 
 const loading = computed(() => {

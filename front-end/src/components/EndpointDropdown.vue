@@ -15,7 +15,7 @@ const props = defineProps({
 });
 
 const selectedRoute = ref(props.startRoute);
-console.log(props)
+
 watch(selectedRoute, (newRoute) => {
     emit('routeChanged', newRoute);
 })

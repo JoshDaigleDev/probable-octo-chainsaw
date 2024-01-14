@@ -4,35 +4,37 @@ import { useAPIGatewayStore } from '@/stores/apiGateway'
 
 describe('API Gateway Store', () => {
     beforeEach(() => {
-        setActivePinia(createPinia())
-    })
+        setActivePinia(createPinia());
+    });
 
     const expectedData =  [
-        {
-            "age": 35,
-            "name": "Josh",
-        },
-        {
-            "age": 35,
-            "name": "Josh",
-        },
-        {
-            "age": 35,
-            "name": "Josh",
-        },
-        {
-            "age": 35,
-            "name": "Josh",
-        },
-        {
-            "age": 35,
-            "name": "Josh",
-        }] 
+        { "id": 1, "name": "John" },
+        { "id": 2, "name": "Marry" }] 
 
-    it('Loads Data', async () =>{
+    const route = {name:"test", path:"v1/users"}
+    
+    it('Proper State After INIT', async () => {
         const apiGateway = useAPIGatewayStore();
+        expect(apiGateway.recentPOSTResponse).toBe(undefined);
+        expect(apiGateway.recentResponseStatus).toBe(undefined);
         expect(apiGateway.currentData).toStrictEqual([]);
-        await apiGateway.fetchData("list?prop")
+        expect(apiGateway.currentRoute).toStrictEqual({name: "Users", path:"random-users"});
+        expect(apiGateway.isLoading).toStrictEqual(false);
+    });
+
+    it('Proper State After GET', async () => {
+        const apiGateway = useAPIGatewayStore();
+        await apiGateway.getData(route);
         expect(apiGateway.currentData).toStrictEqual(expectedData);
-    })
-})
+        expect(apiGateway.recentResponseStatus.status).toBe(200);
+        expect(apiGateway.currentRoute).toStrictEqual({name:"test", path:"v1/users"});
+    });
+
+    it('Proper State After POST', async () => {
+        const apiGateway = useAPIGatewayStore();
+        await apiGateway.getData(route);
+        await apiGateway.postData({"payload":"Doesn't Matter"});
+        expect(apiGateway.recentResponseStatus.status).toBe(201);
+        expect(apiGateway.recentPOSTResponse).toStrictEqual({ "id": 1, "name": "John" });
+    });
+});

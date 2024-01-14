@@ -11,7 +11,7 @@ const currentData = computed(() => {
 });
 
 const currentRoute = computed(() => {
-  return apiGateway.currentRoute
+  return apiGateway.currentRoute;
 });
 
 const loading = computed(() => {
@@ -19,7 +19,7 @@ const loading = computed(() => {
 });
 
 const title = computed(() => {
-  return `VIEW ${currentRoute.value.name.toUpperCase()}`
+  return `VIEW ${currentRoute.value.name.toUpperCase()}`;
 });
 
 </script>

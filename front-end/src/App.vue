@@ -26,7 +26,6 @@ const updateAPI = (newRoute) => {
 }
 
 watch(responseStatus, (newStatus) => {
-  console.log("watch: " + newStatus)
   const catagory = parseInt(newStatus.status.toString().charAt(0), 10)
   if (catagory === 2) {
     toast.add({ severity: 'success', summary: 'Success!', detail: 'The API call succeeded.', life: 3000 });
