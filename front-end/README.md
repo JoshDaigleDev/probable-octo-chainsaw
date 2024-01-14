@@ -63,5 +63,10 @@ These instructions will help you set up and run the project on your local machin
 
 ## TO-DO:
 
-UNIT TESTS 
+UNIT TESTS: 
+
+Component unit tests are currently limited by primevue components: 
+https://github.com/primefaces/primevue/issues/3933
+
+
 DOCKER AUTOMATION + documentation on the process

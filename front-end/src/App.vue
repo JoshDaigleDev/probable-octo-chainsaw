@@ -1,8 +1,8 @@
 <script setup>
 import EndpointDropdown from './components/EndpointDropdown.vue';
 import Toast from 'primevue/toast';
-import { computed, watch, onMounted } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { computed, watch, onMounted } from 'vue';
+import { RouterLink, RouterView } from 'vue-router';
 import { useAPIGatewayStore } from "./stores/apiGateway";
 import { useToast } from 'primevue/usetoast';
 
@@ -26,7 +26,7 @@ const updateAPI = (newRoute) => {
 }
 
 watch(responseStatus, (newStatus) => {
-  const catagory = parseInt(newStatus.status.toString().charAt(0), 10)
+  const catagory = parseInt(newStatus.status.toString().charAt(0), 10);
   if (catagory === 2) {
     toast.add({ severity: 'success', summary: 'Success!', detail: 'The API call succeeded.', life: 3000 });
   } else if (catagory == 4 || catagory == 5) {

@@ -21,7 +21,6 @@ const loading = computed(() => {
 const title = computed(() => {
   return `VIEW ${currentRoute.value.name.toUpperCase()}`;
 });
-
 </script>
 
 <template>

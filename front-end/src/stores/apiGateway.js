@@ -27,7 +27,7 @@ export const useAPIGatewayStore = defineStore("apiGateway", () => {
       isLoading.value = false;
     }
   }
-
+  
   async function getData(route) {
     try {
       isLoading.value = true;

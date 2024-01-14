@@ -12,6 +12,7 @@ describe('API Gateway Store', () => {
         { "id": 2, "name": "Marry" }] 
 
     const route = {name:"test", path:"v1/users"}
+    const badRoute = {name:"bad", path:"not/real"}
     
     it('Proper State After INIT', async () => {
         const apiGateway = useAPIGatewayStore();
@@ -22,7 +23,7 @@ describe('API Gateway Store', () => {
         expect(apiGateway.isLoading).toStrictEqual(false);
     });
 
-    it('Proper State After GET', async () => {
+    it('Proper State After Successful GET', async () => {
         const apiGateway = useAPIGatewayStore();
         await apiGateway.getData(route);
         expect(apiGateway.currentData).toStrictEqual(expectedData);
@@ -30,11 +31,18 @@ describe('API Gateway Store', () => {
         expect(apiGateway.currentRoute).toStrictEqual({name:"test", path:"v1/users"});
     });
 
-    it('Proper State After POST', async () => {
+    it('Proper State After Successful POST', async () => {
         const apiGateway = useAPIGatewayStore();
         await apiGateway.getData(route);
         await apiGateway.postData({"payload":"Doesn't Matter"});
         expect(apiGateway.recentResponseStatus.status).toBe(201);
         expect(apiGateway.recentPOSTResponse).toStrictEqual({ "id": 1, "name": "John" });
+    });
+
+    it('Proper State After Failed GET', async () => {
+        const apiGateway = useAPIGatewayStore();
+        await apiGateway.getData(badRoute);
+        await apiGateway.postData({"payload":"Doesn't Matter"});
+
     });
 });
