@@ -3,8 +3,7 @@ import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import InputText from 'primevue/inputtext';
 import { FilterMatchMode } from 'primevue/api';
-import { useFilterStore } from "../stores/filter";
-import { computed, watch, reactive} from 'vue';
+import { computed, watch, reactive, onMounted} from 'vue';
 
 const props = defineProps({
     data: { 
@@ -21,14 +20,22 @@ const props = defineProps({
 const columns = computed(() => {
     if (props.data.length === 0) return [];
     return Object.keys(props.data[0]).map(field => ({"header": field.charAt(0).toUpperCase() + field.slice(1), "field": field}));
-}) 
+}); 
 
-//Code for storing and using filter for template
-const tableFilterStore = useFilterStore();
-const filters = reactive({global: {value: tableFilterStore.getFilter, matchMode: FilterMatchMode.CONTAINS}})
+const filters = reactive({global: {value: null, matchMode: FilterMatchMode.CONTAINS}});
+
+const STORAGE_KEY = "TABLE_FILTER";
+
+//watch filters reactive object, when it detects a change from the v-model action => update the store 
 watch(filters, (newFilter) => {
-    tableFilterStore.updateFilter(newFilter.global.value)
-})
+    localStorage.setItem(STORAGE_KEY, newFilter.global.value)
+});
+
+//load filter from local storage on page load, if it exists
+onMounted(() => {
+    const storedFilter = localStorage.getItem(STORAGE_KEY);
+    filters.global.value = storedFilter;
+});
 </script>
 
 <template>
