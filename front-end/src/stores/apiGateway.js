@@ -15,7 +15,7 @@ export const useAPIGatewayStore = defineStore("apiGateway", () => {
   const currentRoute = ref(routes.value[0]);
   const isLoading = ref(false);
 
-  async function postData(payload) {
+  const postData = async (payload) => {
     try {
       isLoading.value = true;
       const response = await axios.post(`http://localhost:3030/${currentRoute.value.path}`, payload);
@@ -27,14 +27,17 @@ export const useAPIGatewayStore = defineStore("apiGateway", () => {
       isLoading.value = false;
     }
   }
+
+  const setRoute = (route) => {
+    currentRoute.value = route;
+  }
   
-  async function getData(route) {
+  const getData = async () =>{
     try {
       isLoading.value = true;
-      const response = await axios.get(`http://localhost:3030/${route.path}`);
+      const response = await axios.get(`http://localhost:3030/${currentRoute.value.path}`);
       currentData.value = response.data;
       recentResponseStatus.value = {status: response.status, num: Math.random()};
-      currentRoute.value = route;
       isLoading.value = false;
     }
     catch (error) {
@@ -42,5 +45,5 @@ export const useAPIGatewayStore = defineStore("apiGateway", () => {
     }
   }
 
-  return { currentData, currentRoute, recentPOSTResponse,recentResponseStatus, routes, isLoading, getData, postData }
+  return { currentData, currentRoute, recentPOSTResponse,recentResponseStatus, routes, isLoading, getData, postData, setRoute }
 });

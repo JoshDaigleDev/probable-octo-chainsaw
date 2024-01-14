@@ -2,18 +2,19 @@
 import EndpointDropdown from './components/EndpointDropdown.vue';
 import Toast from 'primevue/toast';
 import { computed, watch, onMounted } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { useAPIGatewayStore } from "./stores/apiGateway";
 import { useToast } from 'primevue/usetoast';
 
+const pageRoutes = useRoute();
 const apiGateway = useAPIGatewayStore();
 const toast = useToast();
 
-const routes = computed(() => {
+const apiRoutes = computed(() => {
   return apiGateway.routes;
 });
 
-const startRoute = computed(() => {
+const currentAPIRoute = computed(() => {
   return apiGateway.currentRoute;
 });
 
@@ -21,8 +22,11 @@ const responseStatus = computed(() => {
   return apiGateway.recentResponseStatus;
 });
 
-const updateAPI = (newRoute) => {
-  apiGateway.getData(newRoute);
+const updateAPIRoute = (newRoute) => {
+  apiGateway.setRoute(newRoute);
+  if (pageRoutes.path === '/') {
+    apiGateway.getData();
+  }
 }
 
 watch(responseStatus, (newStatus) => {
@@ -35,7 +39,7 @@ watch(responseStatus, (newStatus) => {
 });
 
 onMounted(() => {
-  apiGateway.getData(startRoute.value);
+  apiGateway.getData();
 });
 </script>
 
@@ -48,7 +52,7 @@ onMounted(() => {
         <nav class="top-navigation">
           <RouterLink class="router-link" to="/">View</RouterLink>
           <RouterLink class="router-link" to="/edit">Edit</RouterLink>
-          <EndpointDropdown @route-changed="updateAPI" :routes="routes" :start-route="startRoute"></EndpointDropdown>
+          <EndpointDropdown @route-changed="updateAPIRoute" :routes="apiRoutes" :start-route="currentAPIRoute"></EndpointDropdown>
         </nav>
       </header>
     </div>
