@@ -1,8 +1,9 @@
 <script setup>
 import ProgressSpinner from 'primevue/progressspinner';
-import AddItem from '../components/AddItem.vue';
-import { computed } from  "vue";
-import { useAPIGatewayStore } from "../stores/apiGateway";
+import UsersForm from '../components/UsersForm.vue';
+import WordsForm from '../components/WordsForm.vue';
+import { computed } from  'vue';
+import { useAPIGatewayStore } from '../stores/apiGateway';
 
 const apiGateway = useAPIGatewayStore();
 
@@ -24,15 +25,16 @@ const addData = (payload) => {
 </script>
 
 <template>
-  <div class="edit-wrapper">
-    <div class="title-wrapper">
-      <h1 class="title">{{ title }}</h1>
+  <div class='edit-wrapper'>
+    <div class='title-wrapper'>
+      <h1 class='title'>{{ title }}</h1>
     </div>
-    <div v-if="loading" class="spinner-wrapper">
-      <ProgressSpinner style="width: 200px; height: 200px;" strokeWidth="5" fill="var(--surface-ground)"></ProgressSpinner>
+    <div v-if='loading' class='spinner-wrapper'>
+      <ProgressSpinner style='width: 50px; height: 50px;' strokeWidth='5' fill='var(--surface-ground)'></ProgressSpinner>
     </div>
-    <div class="form-wrapper">
-      <AddItem @itemAdded="addData"></AddItem>
+    <div class='form-wrapper'>
+      <UsersForm v-if='title=="ADD USERS"' @submitForm='addData'></UsersForm>
+      <WordsForm v-if='title=="ADD WORDS"' @submitForm='addData'></WordsForm>
     </div>
   </div>
 </template>
@@ -44,11 +46,17 @@ const addData = (payload) => {
   grid-template-columns: repeat(6, minmax(100px, 1fr));
   min-height: 100%;
 }
-.spinner-wrapper {
-  grid-area: 4 / 2 / 5 / 6; 
-  display:flex;
-  align-items: center;
+.form-wrapper {
+  grid-area: 2 / 2 / 6 / 6; 
+  display: flex;
+  align-items: flex-start;
   justify-content: center;
+}
+.spinner-wrapper {
+  grid-area: 1 / 5 / 1 / 5; 
+  display:flex;
+  justify-content: flex-start; 
+  align-items: center;
 }
 .title-wrapper {
   grid-area: 1 / 3 / 1 / 5;
@@ -60,11 +68,5 @@ const addData = (payload) => {
 .title {
   text-decoration: underline;
   text-decoration-color: var(--primary-color);
-}
-.form-wrapper {
-  grid-area: 2 / 2 / 3 / 6;
-  display:flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>

@@ -1,16 +1,15 @@
 import { ref } from 'vue'
-import { defineStore } from 'pinia'
-import axios from "axios"
+import { defineStore } from 'pinia';
+import { makeGETRequest, makePOSTRequest } from '../services/apiService.js';
 
-export const useAPIGatewayStore = defineStore("apiGateway", () => {
+export const useAPIGatewayStore = defineStore('apiGateway', () => {
 
   const routes = ref([
-    {name: "Users", path:"random-users"},
-    {name: "Words", path:"random-words"}
+    {name: 'Users', path:'random-users'},
+    {name: 'Words', path:'random-words'}
   ]);
 
   const currentData = ref([]);
-  const recentPOSTResponse = ref();
   const recentResponseStatus = ref();
   const currentRoute = ref(routes.value[0]);
   const isLoading = ref(false);
@@ -18,12 +17,14 @@ export const useAPIGatewayStore = defineStore("apiGateway", () => {
   const postData = async (payload) => {
     try {
       isLoading.value = true;
-      const response = await axios.post(`http://localhost:3030/${currentRoute.value.path}`, payload);
+      const response = await makePOSTRequest(currentRoute.value.path, payload);
       recentResponseStatus.value = {status: response.status, num: Math.random()};
-      recentPOSTResponse.value = response.data;
-      isLoading.value = false;
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
     }
     catch (error) {
+      recentResponseStatus.value = {status: error.response.status, num: Math.random()};
       isLoading.value = false;
     }
   }
@@ -35,15 +36,18 @@ export const useAPIGatewayStore = defineStore("apiGateway", () => {
   const getData = async () =>{
     try {
       isLoading.value = true;
-      const response = await axios.get(`http://localhost:3030/${currentRoute.value.path}`);
+      const response = await makeGETRequest(currentRoute.value.path);
       currentData.value = response.data;
       recentResponseStatus.value = {status: response.status, num: Math.random()};
-      isLoading.value = false;
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
     }
     catch (error) {
+      recentResponseStatus.value = {status: error.response.status, num: Math.random()};
       isLoading.value = false;
     }
   }
 
-  return { currentData, currentRoute, recentPOSTResponse,recentResponseStatus, routes, isLoading, getData, postData, setRoute }
+  return { currentData, currentRoute, recentResponseStatus, routes, isLoading, getData, postData, setRoute }
 });

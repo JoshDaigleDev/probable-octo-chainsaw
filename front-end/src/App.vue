@@ -3,7 +3,7 @@ import EndpointDropdown from './components/EndpointDropdown.vue';
 import Toast from 'primevue/toast';
 import { computed, watch, onMounted } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
-import { useAPIGatewayStore } from "./stores/apiGateway";
+import { useAPIGatewayStore } from './stores/apiGateway';
 import { useToast } from 'primevue/usetoast';
 
 const pageRoutes = useRoute();
@@ -24,9 +24,7 @@ const responseStatus = computed(() => {
 
 const updateAPIRoute = (newRoute) => {
   apiGateway.setRoute(newRoute);
-  if (pageRoutes.path === '/') {
-    apiGateway.getData();
-  }
+  apiGateway.getData();
 }
 
 watch(responseStatus, (newStatus) => {
@@ -44,24 +42,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="app-wrapper">
+  <div class='app-wrapper'>
     <Toast />
-    <div class="header-wrapper">
-      <header class="navigation-wrapper">
-        <h1 class="title">Joshua Daigle Assessment</h1>
-        <nav class="top-navigation">
-          <RouterLink class="router-link" to="/">View</RouterLink>
-          <RouterLink class="router-link" to="/edit">Edit</RouterLink>
-          <EndpointDropdown @route-changed="updateAPIRoute" :routes="apiRoutes" :start-route="currentAPIRoute"></EndpointDropdown>
+    <div class='header-wrapper'>
+      <header class='navigation-wrapper'>
+        <h1 class='title'>Joshua Daigle Assessment</h1>
+        <nav class='top-navigation'>
+          <RouterLink class='router-link' to='/'>View</RouterLink>
+          <RouterLink class='router-link' to='/add'>Add</RouterLink>
+          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :start-route='currentAPIRoute'></EndpointDropdown>
         </nav>
       </header>
     </div>
-    <div class="view-wrapper">
+    <div class='view-wrapper'>
       <RouterView />
     </div>
-    <div class="footer-wrapper">
+    <div class='footer-wrapper'>
       <footer>
-        Image by <a href="https://www.freepik.com/free-vector/futuristic-white-technology-background_6402687.htm#query=service%20background&position=0&from_view=keyword&track=ais&uuid=ace85877-e292-47c8-a218-fe7fb065c290">Freepik</a>
+        Image by <a href='https://www.freepik.com/free-vector/futuristic-white-technology-background_6402687.htm#query=service%20background&position=0&from_view=keyword&track=ais&uuid=ace85877-e292-47c8-a218-fe7fb065c290'>Freepik</a>
       </footer>
     </div>
   </div>
@@ -109,9 +107,7 @@ onMounted(() => {
   color: white;
   border-radius: 0.2rem;
 }
-
 .router-link:hover {
-  background-color: --primary-color;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .title {

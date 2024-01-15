@@ -16,15 +16,15 @@ const props = defineProps({
     }
 });
 
-//This function maps the keys of an object into an object of this structure: key => {"header": Key, "field": key}
+//This function maps the keys of an object into an object of this structure: key => {'header': Key, 'field': key}
 const columns = computed(() => {
     if (props.data.length === 0) return [];
-    return Object.keys(props.data[0]).map(key => ({"header": key.charAt(0).toUpperCase() + key.slice(1), "field": key}));
+    return Object.keys(props.data[0]).map(key => ({'header': key.charAt(0).toUpperCase() + key.slice(1), 'field': key}));
 }); 
 
 const filters = reactive({global: {value: null, matchMode: FilterMatchMode.CONTAINS}});
 
-const STORAGE_KEY = "TABLE_FILTER";
+const STORAGE_KEY = 'TABLE_FILTER';
 
 //watch filters reactive object, when it detects a change from the v-model action => update the store 
 watch(filters, (newFilter) => {
@@ -39,15 +39,15 @@ onMounted(() => {
 </script>
 
 <template>
- <div class="table-wrapper">
-    <DataTable :value="props.data" v-model:filters="filters" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"> 
+ <div class='table-wrapper'>
+    <DataTable :value='props.data' v-model:filters='filters' paginator :rows='5' :rowsPerPageOptions='[5, 10, 20, 50]'> 
         <template #header>
-            <div class="header-wrapper">
-                <span class="table-title"> {{ props.title}} </span>
-                <InputText v-model="filters['global'].value" class="" placeholder="Keyword Search" />
+            <div class='header-wrapper'>
+                <span class='table-title'> {{ props.title}} </span>
+                <InputText v-model='filters["global"].value' placeholder='Keyword Search' />
             </div>
         </template>
-        <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header" class="col"></Column>
+        <Column v-for='col of columns' :key='col.field' :field='col.field' :header='col.header' class='col'></Column>
     </DataTable>
  </div>
 </template>
@@ -62,7 +62,7 @@ onMounted(() => {
     min-width: max-content;
 }
 .table-wrapper {
-    border: 1px solid var(--surface-500); 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .col {
     width: 100px;

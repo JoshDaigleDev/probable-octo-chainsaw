@@ -1,8 +1,8 @@
 <script setup>
 import DataTable from '../components/DataTable.vue'
 import ProgressSpinner from 'primevue/progressspinner';
-import { useAPIGatewayStore } from "../stores/apiGateway";
-import { computed } from "vue";
+import { useAPIGatewayStore } from '../stores/apiGateway';
+import { computed } from 'vue';
 
 const apiGateway = useAPIGatewayStore();
 
@@ -24,15 +24,15 @@ const title = computed(() => {
 </script>
 
 <template>
-  <div class="display-wrapper">
-    <div class="title-wrapper">
-      <h1 class="title">{{ title }}</h1>
+  <div class='display-wrapper'>
+    <div class='title-wrapper'>
+      <h1 class='title'>{{ title }}</h1>
     </div>
-    <div v-if="loading" class="spinner-wrapper">
-      <ProgressSpinner style="width: 200px; height: 200px;" strokeWidth="5" fill="var(--surface-ground)"></ProgressSpinner>
-    </div>
-    <div class="table-wrapper">
-      <DataTable :data="currentData" :title="currentRoute.name"/>
+    <div v-if='loading' class='spinner-wrapper'>
+        <ProgressSpinner style='width: 50px; height: 50px;' strokeWidth='5' fill='var(--surface-ground)'></ProgressSpinner>
+      </div>
+    <div class='table-wrapper'>
+      <DataTable :data='currentData' :title='currentRoute.name'/>
     </div>
   </div>
 </template>
@@ -48,10 +48,10 @@ const title = computed(() => {
   grid-area: 2 / 2 / 6 / 6;
 }
 .spinner-wrapper {
-  grid-area: 4 / 2 / 5 / 6; 
+  grid-area: 1 / 5 / 1 / 5; 
   display:flex;
+  margin-right: auto;
   align-items: center;
-  justify-content: center;
 }
 .title-wrapper {
   grid-area: 1 / 3 / 1 / 5;
