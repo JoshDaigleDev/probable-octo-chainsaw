@@ -1,16 +1,37 @@
 <script setup>
 import InputText from 'primevue/inputtext';
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
 const emit = defineEmits(['submitForm'])
 
 const submit = () => {
     const payload = {words: words.value, author: author.value}
     emit('submitForm', payload);
+    words.value = null;
+    author.value = null;
 }
 
 const words = ref();
 const author = ref();
+
+const WORDS_STORAGE_KEY = 'USER_FORM#WORDS';
+const AUTHOR_STORAGE_KEY = 'USER_FORM#AUTHOR';
+
+watch(words, (newWords) => {
+    localStorage.setItem(WORDS_STORAGE_KEY, newWords);
+});
+
+watch(author, (newAuthor) => {
+    localStorage.setItem(AUTHOR_STORAGE_KEY, newAuthor);
+});
+
+onMounted(() => {
+    const storedWords = localStorage.getItem(WORDS_STORAGE_KEY);
+    const storedAuthor = localStorage.getItem(AUTHOR_STORAGE_KEY);
+
+    if(storedWords != null && storedWords != "null") words.value = storedWords;
+    if(storedAuthor != null && storedAuthor != "null") author.value = storedAuthor;
+});
 </script>
 
 <template>

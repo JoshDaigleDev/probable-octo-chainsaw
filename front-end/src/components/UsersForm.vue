@@ -1,19 +1,48 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
 const emit = defineEmits(['submitForm'])
 
-
 const submit = () => {
     const payload = {name: name.value, age: age.value, email: email.value}
     emit('submitForm', payload);
+    name.value = null;
+    age.value = null;
+    email.value = null;
 }
 
 const name = ref();
 const age = ref();
-const email = ref()
+const email = ref();
 
+const NAME_STORAGE_KEY = 'USER_FORM#NAME';
+const AGE_STORAGE_KEY = 'USER_FORM#AGE';
+const EMAIL_STORAGE_KEY = 'USER_FORM#EMAIL';
+
+watch(name, (newName) => {
+    localStorage.setItem(NAME_STORAGE_KEY, newName);
+});
+
+watch(age, (newAge) => {
+    localStorage.setItem(AGE_STORAGE_KEY, newAge);
+});
+
+watch(email, (newEmail) => {
+    localStorage.setItem(EMAIL_STORAGE_KEY, newEmail);
+});
+
+onMounted(() => {
+    const storedName = localStorage.getItem(NAME_STORAGE_KEY);
+    const storedAge = localStorage.getItem(AGE_STORAGE_KEY);
+    const storedEmail = localStorage.getItem(EMAIL_STORAGE_KEY);
+
+    if(storedName != null && storedName != "null") name.value = storedName;
+    if(storedAge != null && storedAge != NaN && storedAge !== "" && storedAge != "NaN" && storedName != "null"){
+        age.value = parseInt(storedAge);  
+    } 
+    if(storedEmail != null && storedEmail != "null") email.value = storedEmail;
+});
 </script>
 
 <template>

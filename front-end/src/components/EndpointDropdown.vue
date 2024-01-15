@@ -1,6 +1,6 @@
 <script setup>
 import Dropdown from 'primevue/dropdown';
-import { watch, ref } from 'vue';
+import { watch, watchEffect, ref } from 'vue';
 
 const emit = defineEmits(['routeChanged']);
 const props = defineProps({
@@ -8,13 +8,17 @@ const props = defineProps({
         type: Array, 
         required: true 
     },
-    startRoute: {
+    currentRoute: {
         type: Object,
         required: true
     }
 });
 
-const selectedRoute = ref(props.startRoute);
+const selectedRoute = ref(props.currentRoute);
+
+watchEffect(() => {
+    selectedRoute.value = props.currentRoute;
+});
 
 watch(selectedRoute, (newRoute) => {
     emit('routeChanged', newRoute);

@@ -29,14 +29,16 @@ const updateAPIRoute = (newRoute) => {
 watch(responseStatus, (newStatus) => {
   const catagory = parseInt(newStatus.status.toString().charAt(0), 10);
   if (catagory === 2) {
-    toast.add({ severity: 'success', summary: 'Success!', detail: 'The API call succeeded.', life: 3000 });
+    toast.add({ severity: 'success', summary: 'Success!', detail: `${newStatus.method} request for endpoint: ${newStatus.route} succeeded`, life: 3000 });
   } else if (catagory == 4 || catagory == 5) {
     toast.add({ severity: 'error', summary: 'Failure!', detail: 'The API call failed.'});
   }
 });
 
 onMounted(() => {
-  apiGateway.getData();
+  const ROUTE_STORAGE_KEY = 'API#ROUTE'
+  const storedRoute = JSON.parse(localStorage.getItem(ROUTE_STORAGE_KEY));
+  if(storedRoute != null) apiGateway.setRoute(storedRoute);
 });
 </script>
 
@@ -49,17 +51,12 @@ onMounted(() => {
         <nav class='top-navigation'>
           <RouterLink class='router-link' to='/'>View</RouterLink>
           <RouterLink class='router-link' to='/add'>Add</RouterLink>
-          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :start-route='currentAPIRoute'></EndpointDropdown>
+          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :current-route='currentAPIRoute'></EndpointDropdown>
         </nav>
       </header>
     </div>
     <div class='view-wrapper'>
       <RouterView />
-    </div>
-    <div class='footer-wrapper'>
-      <footer>
-        Image by <a href='https://www.freepik.com/free-vector/futuristic-white-technology-background_6402687.htm#query=service%20background&position=0&from_view=keyword&track=ais&uuid=ace85877-e292-47c8-a218-fe7fb065c290'>Freepik</a>
-      </footer>
     </div>
   </div>
 </template>
@@ -113,11 +110,6 @@ onMounted(() => {
   grid-area: 1 / 2 / 1 / 5;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-.footer-wrapper{
-  grid-area: 12 / 1 / 12 / 6;
-  display:flex;
   align-items: center;
 }
 </style>

@@ -1,6 +1,22 @@
 # Josh Daigle Take-Home Assessment
 
-This what I developed as part of a take-home assessment given by Elmer's Manufacturing. 
+This what I developed as part of a take-home assessment given by Elmer's Manufacturing.
+**Features**:
+This is an example user interface for the backend API, currently servicing 2 endpoints. This project has been
+structured in a way to be easily scalable, as adding support for another API endpoint is as simple 
+as adding a new endpoint to the list of endpoints in the API Gateway store, and then adding a new input 
+form for it. The datatable is dynamic and will automatically shape its rows and columns to fit new data coming 
+in from a different endpoint. All form input fields are cached in local storage and persist on page reload. 
+
+**Possible Improvements**:
+ - More extensive unit tests for components
+ - Unit tests for top-level App and views
+ - SCSS CSS pre-processing to limit CSS class re-use
+ - Refactor some internal component logic into re-usable composable files.
+
+ 
+**NOTE: Component unit tests are currently limited by primevue components**: 
+https://github.com/primefaces/primevue/issues/3933
 
 ## Getting Started
 
@@ -9,6 +25,7 @@ These instructions will help you set up and run the project on your local machin
 ### Prerequisites
 
 - Node.js and npm installed on your machine.
+- Docker Desktop installed and running on your machine.
 
 ### Installing
 
@@ -73,10 +90,7 @@ These instructions will help you set up and run the project on your local machin
 
    You can view the docker container on ```localhost:8080```, despite what it prints in the terminal 
 
-## TO-DO:
+### Attribution
 
-UNIT TEST IMPROVEMENTS: 
-
-Component unit tests are currently limited by primevue components: 
-https://github.com/primefaces/primevue/issues/3933
-
+**Background Image**:
+Image by Freepik: https://www.freepik.com/free-vector/futuristic-white-technology-background_6402687.htm#query=service%20background&position=0&from_view=keyword&track=ais&uuid=ace85877-e292-47c8-a218-fe7fb065c290'
