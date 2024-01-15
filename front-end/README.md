@@ -61,12 +61,22 @@ These instructions will help you set up and run the project on your local machin
 
    This will run all the vitest unit tests. Make sure the backend is running for all tests to pass. 
 
+4. **Run Docker Container of this application:**
+   
+   Note: Make sure back-end API is running.
+
+   From root directory:
+   ```bash
+   cd front-end
+   docker compose up
+   ```
+
+   You can view the docker container on ```localhost:8080```, despite what it prints in the terminal 
+
 ## TO-DO:
 
-UNIT TESTS: 
+UNIT TEST IMPROVEMENTS: 
 
 Component unit tests are currently limited by primevue components: 
 https://github.com/primefaces/primevue/issues/3933
 
-
-DOCKER AUTOMATION + documentation on the process

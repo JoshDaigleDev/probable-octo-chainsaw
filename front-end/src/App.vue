@@ -2,11 +2,10 @@
 import EndpointDropdown from './components/EndpointDropdown.vue';
 import Toast from 'primevue/toast';
 import { computed, watch, onMounted } from 'vue';
-import { RouterLink, RouterView, useRoute } from 'vue-router';
+import { RouterLink, RouterView } from 'vue-router';
 import { useAPIGatewayStore } from './stores/apiGateway';
 import { useToast } from 'primevue/usetoast';
 
-const pageRoutes = useRoute();
 const apiGateway = useAPIGatewayStore();
 const toast = useToast();
 
