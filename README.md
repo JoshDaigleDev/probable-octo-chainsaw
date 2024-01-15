@@ -36,13 +36,13 @@ These instructions will help you set up and run the project on your local machin
 2. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/joshdaigledev/[REPOSITORY NAME].git
+   git clone https://github.com/joshdaigledev/probable-octo-chainsaw.git
    ```
 
 3. **Navigate to the Front-End Project Directory:**
 
    ```bash
-   cd [DIRECTORY_NAME]/front-end
+   cd [ROOT_DIRECTORY]/front-end
    ```
 
 4. **Install Dependencies:**
