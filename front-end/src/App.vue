@@ -38,7 +38,12 @@ watch(responseStatus, (newStatus) => {
 onMounted(() => {
   const ROUTE_STORAGE_KEY = 'API#ROUTE'
   const storedRoute = JSON.parse(localStorage.getItem(ROUTE_STORAGE_KEY));
-  if(storedRoute != null) apiGateway.setRoute(storedRoute);
+  if(storedRoute == null) {
+    apiGateway.getData();
+  } else {
+    apiGateway.setRoute(storedRoute);
+  }
+  
 });
 </script>
 

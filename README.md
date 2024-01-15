@@ -28,24 +28,19 @@ These instructions will help you set up and run the project on your local machin
 - Docker Desktop installed and running on your machine.
 
 ### Installing
-
-1. **Fork the Repository:**
-
-   Click on the "Fork" button at the top right of this repository to create your copy.
-
-2. **Clone the Repository:**
+1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/joshdaigledev/probable-octo-chainsaw.git
    ```
 
-3. **Navigate to the Front-End Project Directory:**
+2. **Navigate to the Front-End Project Directory:**
 
    ```bash
-   cd [ROOT_DIRECTORY]/front-end
+   cd probable-octo-chainsaw/front-end
    ```
 
-4. **Install Dependencies:**
+3. **Install Dependencies:**
 
    ```bash
    npm install
@@ -55,7 +50,8 @@ These instructions will help you set up and run the project on your local machin
 
 1. **Start the Frontend Development Server:**
 
-   From root directory:
+   From root directory(/probable-octo-chainsaw):
+   
    ```bash
    cd front-end
    npm run dev
@@ -64,7 +60,9 @@ These instructions will help you set up and run the project on your local machin
    This will start the development server, and you can view the project at `http://localhost:8000` in your browser.
 
 2. **Start the Backend API:**
-   From root directory:
+
+   From root directory(/probable-octo-chainsaw):
+
    ```bash
    cd back-end
    docker compose up
@@ -72,7 +70,10 @@ These instructions will help you set up and run the project on your local machin
 
 3. **Run Unit Tests with [Vitest](https://vitest.dev/):**
 
+   From root directory(/probable-octo-chainsaw):
+
    ```bash
+   cd front-end
    npm run test:unit
    ```
 
