@@ -55,7 +55,7 @@ const addData = (payload) => {
 .spinner-wrapper {
   grid-area: 1 / 5 / 1 / 5; 
   display:flex;
-  justify-content: flex-start; 
+  margin-right: auto;
   align-items: center;
 }
 .title-wrapper {
