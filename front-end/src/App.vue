@@ -31,7 +31,7 @@ watch(responseStatus, (newStatus) => {
   if (catagory === 2) {
     toast.add({ severity: 'success', summary: 'Success!', detail: `${newStatus.method} request for endpoint: ${newStatus.route} succeeded`, life: 3000 });
   } else if (catagory == 4 || catagory == 5) {
-    toast.add({ severity: 'error', summary: 'Failure!', detail: 'The API call failed.'});
+    toast.add({ severity: 'error', summary: 'Failure!', detail: `${newStatus.method} request for endpoint: ${newStatus.route} failed`, life: 3000 });
   }
 });
 

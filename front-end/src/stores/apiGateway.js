@@ -6,7 +6,8 @@ export const useAPIGatewayStore = defineStore('apiGateway', () => {
 
   const routes = ref([
     {name: 'Users', path:'random-users'},
-    {name: 'Words', path:'random-words'}
+    {name: 'Words', path:'random-words'},
+    {name: '*Broken Endpoint*', path:'some-urls'}
   ]);
 
   const ROUTE_STORAGE_KEY = 'API#ROUTE';
@@ -19,14 +20,16 @@ export const useAPIGatewayStore = defineStore('apiGateway', () => {
     try {
       isLoading.value = true;
       const response = await makePOSTRequest(currentRoute.value.path, payload);
-      recentResponseStatus.value = {status: response.status, method: 'POST', route:currentRoute.value.path, num: Math.random()};
-      setTimeout(() => {
+      recentResponseStatus.value = {status: response.status, method: 'POST', route:currentRoute.value.path, num: Math.random()}; //Math.random ensures that reactivity is triggered even though responses are the same
+      setTimeout(() => { //This timeout is just to simulate a slight loading delay so you get to see the spinner
         isLoading.value = false;
       }, 500);
     }
     catch (error) {
       recentResponseStatus.value = {status: error.response.status, method: 'POST', route:currentRoute.value.path, num: Math.random()};
-      isLoading.value = false;
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
     }
   }
 
@@ -49,7 +52,10 @@ export const useAPIGatewayStore = defineStore('apiGateway', () => {
     }
     catch (error) {
       recentResponseStatus.value = {status: error.response.status, method: 'GET', route:currentRoute.value.path, num: Math.random()};
-      isLoading.value = false;
+      currentData.value = [];
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
     }
   }
 
