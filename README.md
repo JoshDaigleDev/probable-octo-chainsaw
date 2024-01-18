@@ -50,7 +50,7 @@ These instructions will help you set up and run the project on your local machin
 
 1. **Start the Frontend Development Server:**
 
-   From root directory(/probable-octo-chainsaw):
+   From root directory:
    
    ```bash
    cd front-end
@@ -61,16 +61,15 @@ These instructions will help you set up and run the project on your local machin
 
 2. **Start the Backend API:**
 
-   From root directory(/probable-octo-chainsaw):
+   From root directory:
 
    ```bash
-   cd back-end
-   docker compose up
+   docker compose up probable-octo-chainsaw-api
    ```
 
 3. **Run Unit Tests with [Vitest](https://vitest.dev/):**
 
-   From root directory(/probable-octo-chainsaw):
+   From root directory:
 
    ```bash
    cd front-end
@@ -79,13 +78,12 @@ These instructions will help you set up and run the project on your local machin
 
    This will run all the vitest unit tests. Make sure the backend is running for all tests to pass. 
 
-4. **Run Docker Container of this application:**
+4. **Run Docker Container of this application(Front-end & Back-end):**
    
-   Note: Make sure back-end API is running.
+   Note: Make sure back-end API is no longer running (```docker compose down probable-octo-chainsaw-api```).
 
    From root directory:
    ```bash
-   cd front-end
    docker compose up
    ```
 

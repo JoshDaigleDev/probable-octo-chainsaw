@@ -38,12 +38,12 @@ watch(responseStatus, (newStatus) => {
 onMounted(() => {
   const ROUTE_STORAGE_KEY = 'API#ROUTE'
   const storedRoute = JSON.parse(localStorage.getItem(ROUTE_STORAGE_KEY));
-  if(storedRoute == null) {
+  if (storedRoute == null) {
     apiGateway.getData();
   } else {
     apiGateway.setRoute(storedRoute);
   }
-  
+
 });
 </script>
 
@@ -56,7 +56,8 @@ onMounted(() => {
         <nav class='top-navigation'>
           <RouterLink class='router-link' to='/'>View</RouterLink>
           <RouterLink class='router-link' to='/add'>Add</RouterLink>
-          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :current-route='currentAPIRoute'></EndpointDropdown>
+          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :current-route='currentAPIRoute'>
+          </EndpointDropdown>
         </nav>
       </header>
     </div>
@@ -74,6 +75,7 @@ onMounted(() => {
   grid-template-rows: repeat(12, minmax(50px, 1fr));
   grid-template-columns: repeat(12, minmax(50px, 1fr));
 }
+
 .header-wrapper {
   grid-area: 1 / 1 / 1 / 13;
   background-color: var(--surface-400);
@@ -81,17 +83,20 @@ onMounted(() => {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 40;
 }
+
 .view-wrapper {
   grid-area: 2 / 2 / 12 / 12;
   background-color: rgba(233, 236, 239, 0.9);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .navigation-wrapper {
   min-height: 100%;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(12, minmax(50px, 1fr));
 }
+
 .top-navigation {
   grid-area: 1 / 5 / 1 / 9;
   display: flex;
@@ -99,6 +104,7 @@ onMounted(() => {
   align-items: center;
   gap: 1rem;
 }
+
 .router-link {
   font-size: x-large;
   padding: 1rem;
@@ -107,13 +113,14 @@ onMounted(() => {
   color: white;
   border-radius: 0.2rem;
 }
+
 .router-link:hover {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .title {
   grid-area: 1 / 2 / 1 / 5;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-</style>
+}</style>
