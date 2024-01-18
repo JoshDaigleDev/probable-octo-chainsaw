@@ -29,7 +29,7 @@ const title = computed(() => {
       <h1 class='title'>{{ title }}</h1>
     </div>
     <div v-if='loading' class='spinner-wrapper'>
-        <ProgressSpinner style='width: 50px; height: 50px;' strokeWidth='5' fill='var(--surface-ground)'></ProgressSpinner>
+        <ProgressSpinner></ProgressSpinner>
       </div>
     <div class='table-wrapper'>
       <DataTable :data='currentData' :title='currentRoute.name'/>

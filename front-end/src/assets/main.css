@@ -3,7 +3,26 @@ body {
   font-size: 15px;
   padding: 0px;
   margin: 0px;
-  background-color: var(--white);
+  background-color: var(--surface-0);
   background-image: url("./bg-image.jpg");
   text-rendering: optimizeLegibility;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+//Global override for Primevue ProgressSpinner
+
+//For some reason you need to specify width/height for BOTH classes or else it has no effect. 
+.p-progress-spinner {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.p-progress-spinner-svg {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.p-progress-spinner-circle {
+  stroke: var(--primary-color) !important;
+  stroke-width: 0.4rem !important;
 }

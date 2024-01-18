@@ -27,10 +27,10 @@ const updateAPIRoute = (newRoute) => {
 }
 
 watch(responseStatus, (newStatus) => {
-  const catagory = parseInt(newStatus.status.toString().charAt(0), 10);
-  if (catagory === 2) {
+  const category = parseInt(newStatus.status.toString().charAt(0), 10);
+  if (category === 2) {
     toast.add({ severity: 'success', summary: 'Success!', detail: `${newStatus.method} request for endpoint: ${newStatus.route} succeeded`, life: 3000 });
-  } else if (catagory == 4 || catagory == 5) {
+  } else if (category == 4 || category == 5) {
     toast.add({ severity: 'error', summary: 'Failure!', detail: `${newStatus.method} request for endpoint: ${newStatus.route} failed`, life: 3000 });
   }
 });
@@ -73,7 +73,6 @@ onMounted(() => {
   display: grid;
   grid-template-rows: repeat(12, minmax(50px, 1fr));
   grid-template-columns: repeat(12, minmax(50px, 1fr));
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .header-wrapper {
   grid-area: 1 / 1 / 1 / 13;
