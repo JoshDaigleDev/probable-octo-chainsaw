@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia';
-import { makeGETRequest, makePOSTRequest } from '../services/apiService.js';
+import axios from 'axios';
 
 export const useAPIGatewayStore = defineStore('apiGateway', () => {
 
@@ -10,27 +10,53 @@ export const useAPIGatewayStore = defineStore('apiGateway', () => {
     { name: '*Broken Endpoint*', path: 'some-urls' }
   ]);
 
+  const BASE_URL = 'http://localhost:3030';
+
+  const axiosInstance = axios.create({
+    baseURL: BASE_URL
+  });
+
   const ROUTE_STORAGE_KEY = 'API#ROUTE';
   const currentData = ref([]);
   const recentResponseStatus = ref();
   const currentRoute = ref(routes.value[0]);
   const isLoading = ref(false);
 
-  const postData = async (payload) => {
-    try {
+  axiosInstance.interceptors.request.use(
+    (config) => {
       isLoading.value = true;
-      const response = await makePOSTRequest(currentRoute.value.path, payload);
-      recentResponseStatus.value = { status: response.status, method: 'POST', route: currentRoute.value.path, num: Math.random() }; //Math.random ensures that reactivity is triggered even though responses are the same
-      setTimeout(() => { //This timeout is just to simulate a slight loading delay so you get to see the spinner
-        isLoading.value = false;
-      }, 500);
-    }
-    catch (error) {
-      recentResponseStatus.value = { status: error.response.status, method: 'POST', route: currentRoute.value.path, num: Math.random() };
+      return config;
+    },
+    (error) => {
       setTimeout(() => {
         isLoading.value = false;
       }, 500);
+      return Promise.reject(error);
     }
+  );
+
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      recentResponseStatus.value = { status: response.status, method: response.config.method.toUpperCase(), route: currentRoute.value.path, num: Math.random() }; //Math.random ensures that reactivity is triggered even though responses are the same
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
+      return response;
+    },
+    (error) => {
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
+      recentResponseStatus.value = { status: error.response.status, method: error.config.method.toUpperCase(), route: currentRoute.value.path, num: Math.random() }; 
+      return Promise.reject(error);
+    }
+  );
+
+  const postData = async (payload) => {
+    try {
+      await axiosInstance.post(`${BASE_URL}/${currentRoute.value.path}`, payload);
+    }
+    catch (error) {}
   }
 
   const setRoute = (route) => {
@@ -42,20 +68,11 @@ export const useAPIGatewayStore = defineStore('apiGateway', () => {
 
   const getData = async () => {
     try {
-      isLoading.value = true;
-      const response = await makeGETRequest(currentRoute.value.path);
+      const response = await axiosInstance.get(`${BASE_URL}/${currentRoute.value.path}`);
       currentData.value = response.data;
-      recentResponseStatus.value = { status: response.status, method: 'GET', route: currentRoute.value.path, num: Math.random() };
-      setTimeout(() => {
-        isLoading.value = false;
-      }, 500);
     }
     catch (error) {
-      recentResponseStatus.value = { status: error.response.status, method: 'GET', route: currentRoute.value.path, num: Math.random() };
       currentData.value = [];
-      setTimeout(() => {
-        isLoading.value = false;
-      }, 500);
     }
   }
 

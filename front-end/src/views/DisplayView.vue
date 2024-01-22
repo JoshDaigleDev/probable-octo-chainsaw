@@ -1,6 +1,5 @@
 <script setup>
 import DataTable from '../components/DataTable.vue'
-import ProgressSpinner from 'primevue/progressspinner';
 import { useAPIGatewayStore } from '../stores/apiGateway';
 import { computed } from 'vue';
 
@@ -14,10 +13,6 @@ const currentRoute = computed(() => {
   return apiGateway.currentRoute;
 });
 
-const loading = computed(() => {
-  return apiGateway.isLoading;
-});
-
 const title = computed(() => {
   return `VIEW ${currentRoute.value.name.toUpperCase()}`;
 });
@@ -27,9 +22,6 @@ const title = computed(() => {
   <div class='display-wrapper'>
     <div class='title-wrapper'>
       <h1 class='title'>{{ title }}</h1>
-    </div>
-    <div v-if='loading' class='spinner-wrapper'>
-      <ProgressSpinner></ProgressSpinner>
     </div>
     <div class='table-wrapper'>
       <DataTable :data='currentData' :title='currentRoute.name' />

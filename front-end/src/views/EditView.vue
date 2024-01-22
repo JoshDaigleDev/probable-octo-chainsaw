@@ -1,5 +1,4 @@
 <script setup>
-import ProgressSpinner from 'primevue/progressspinner';
 import UsersForm from '../components/UsersForm.vue';
 import WordsForm from '../components/WordsForm.vue';
 import { computed } from 'vue';
@@ -15,10 +14,6 @@ const title = computed(() => {
   return `ADD ${currentRoute.value.name.toUpperCase()}`;
 });
 
-const loading = computed(() => {
-  return apiGateway.isLoading;
-});
-
 const addData = (payload) => {
   apiGateway.postData(payload);
 }
@@ -28,9 +23,6 @@ const addData = (payload) => {
   <div class='edit-wrapper'>
     <div class='title-wrapper'>
       <h1 class='title'>{{ title }}</h1>
-    </div>
-    <div v-if='loading' class='spinner-wrapper'>
-      <ProgressSpinner></ProgressSpinner>
     </div>
     <div class='form-wrapper'>
       <UsersForm v-if='title == "ADD USERS"' @submitForm='addData'></UsersForm>

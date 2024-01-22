@@ -1,6 +1,7 @@
 <script setup>
 import EndpointDropdown from './components/EndpointDropdown.vue';
 import Toast from 'primevue/toast';
+import ProgressSpinner from 'primevue/progressspinner';
 import { computed, watch, onMounted } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
 import { useAPIGatewayStore } from './stores/apiGateway';
@@ -15,6 +16,10 @@ const apiRoutes = computed(() => {
 
 const currentAPIRoute = computed(() => {
   return apiGateway.currentRoute;
+});
+
+const loading = computed(() => {
+  return apiGateway.isLoading;
 });
 
 const responseStatus = computed(() => {
@@ -56,9 +61,11 @@ onMounted(() => {
         <nav class='top-navigation'>
           <RouterLink class='router-link' to='/'>View</RouterLink>
           <RouterLink class='router-link' to='/add'>Add</RouterLink>
-          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :current-route='currentAPIRoute'>
-          </EndpointDropdown>
         </nav>
+        <div class="dropdown-wrapper">
+          <EndpointDropdown @route-changed='updateAPIRoute' :routes='apiRoutes' :current-route='currentAPIRoute'/>
+          <ProgressSpinner v-if='loading'/>
+        </div>
       </header>
     </div>
     <div class='view-wrapper'>
@@ -82,12 +89,14 @@ onMounted(() => {
   border-bottom: 1px solid var(--surface-500);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   z-index: 40;
+  min-height: 100%;
 }
 
 .view-wrapper {
   grid-area: 2 / 2 / 12 / 12;
   background-color: rgba(233, 236, 239, 0.9);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  min-height: 100%;
 }
 
 .navigation-wrapper {
@@ -95,10 +104,18 @@ onMounted(() => {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(12, minmax(50px, 1fr));
+  gap: 1rem;
+}
+
+.dropdown-wrapper {
+  grid-column: 8 / 10;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .top-navigation {
-  grid-area: 1 / 5 / 1 / 9;
+  grid-column: 6 / 8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,7 +136,7 @@ onMounted(() => {
 }
 
 .title {
-  grid-area: 1 / 2 / 1 / 5;
+  grid-column: 2 / 5;
   display: flex;
   justify-content: center;
   align-items: center;

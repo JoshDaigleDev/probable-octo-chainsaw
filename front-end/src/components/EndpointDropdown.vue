@@ -26,7 +26,7 @@ watch(selectedRoute, (newRoute) => {
 </script>
 
 <template>
-  <div class='dropdown-wrapper'>
+  <div class='dropdown'>
     <span class='label'>Endpoints</span>
     <Dropdown v-model='selectedRoute' :options='props.routes' optionLabel='name' placeholder='Select an Endpoint'
       data-testid='my-primevue-dropdown' />
@@ -34,9 +34,10 @@ watch(selectedRoute, (newRoute) => {
 </template>
 
 <style scoped>
-.dropdown-wrapper {
+.dropdown {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .label {
