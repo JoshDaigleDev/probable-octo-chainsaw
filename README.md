@@ -1,66 +1,95 @@
-**Assessment for Josh**
+# Josh Daigle Take-Home Assessment
 
-**Task: Vue.js Application with Mocked Backend API Integration**
+This what I developed as part of a take-home assessment given by Elmer's Manufacturing.
+**Features**:
+This is an example user interface for the backend API, currently servicing 2 endpoints. This project has been
+structured in a way to be easily scalable, as adding support for another API endpoint is as simple 
+as adding a new endpoint to the list of endpoints in the API Gateway store, and then adding a new input 
+form for it. The datatable is dynamic and will automatically shape its rows and columns to fit new data coming 
+in from a different endpoint. All form input fields are cached in local storage and persist on page reload. 
 
-**Requirements:**
+**Possible Improvements**:
+ - More extensive unit tests for components
+ - Unit tests for top-level App and views
+ - SCSS CSS pre-processing to limit CSS class re-use
+ - Refactor some internal component logic into re-usable composable files.
 
-1. **Setup:**
-    - Fork this GitHub repository: [Backend API](https://github.com/carlsteenkamp/probable-octo-chainsaw.git)
-    - Create a new Vue.js project using Vue CLI or any other preferred method.
+ 
+**NOTE: Component unit tests are currently limited by primevue components**: 
+https://github.com/primefaces/primevue/issues/3933
 
-2. **Vue.js Application:**
-    - Create a single-page application (SPA) with Vue.js.
-    - Include at least two components (e.g., one for displaying data and one for form/input).
-    - Use Vue Router to navigate between different views (if applicable).
+## Getting Started
 
-3. **Backend API Integration:**
-    - The backend API is available at `localhost:3030` when you run the docker container.
-    - Implement functionality to fetch data from the API and display it in your Vue.js application. 
-      - Have a look at the `mocks` folder to see what paths and requests are available. Feel free to add more data to these mocks.
-      - New json files can be added with different mock data if you wish
-    - Display the fetched data in a meaningful way, using appropriate Vue.js features (e.g., v-for for lists).
-    - Implement a form or input component that allows users to interact with the backend API (e.g., submitting new data).
+These instructions will help you set up and run the project on your local machine.
 
-4. **Error Handling:**
-    - Implement error handling for API requests. Display meaningful error messages to the user in case of API failures.
+### Prerequisites
 
-5. **Additional Features (Optional, for bonus points):**
-    - Implement pagination for the displayed data.
-    - Add loading indicators to show when data is being fetched.
-    - Implement a feature to filter or search through the displayed data.
-    - bonus, bonus points if the app can remember search filters next time
-    - At Elmer's we make use of `https://primevue.org/`. Would be nice if you could also use it.
+- Node.js and npm installed on your machine.
+- Docker Desktop installed and running on your machine.
 
-6. **Documentation:**
-    - Update README.md explaining how to run the Vue.js and Backend applications locally.
-    - Include any additional instructions for the developer to understand the code and project structure.
+### Installing
+1. **Clone the Repository:**
 
-**Evaluation Criteria:**
+   ```bash
+   git clone https://github.com/joshdaigledev/probable-octo-chainsaw.git
+   ```
 
-The assessment will be evaluated based on the following criteria:
+2. **Navigate to the Front-End Project Directory:**
 
-1. **Vue.js Proficiency:**
-    - Effective use of Vue.js features and components.
-    - Proper use of Vue Router for navigation.
+   ```bash
+   cd probable-octo-chainsaw/front-end
+   ```
 
-2. **Backend API Integration:**
-    - Successful integration with the provided backend API.
-    - Proper handling of API responses and errors.
+3. **Install Dependencies:**
 
-3. **Code Quality:**
-    - Well-organized and readable code.
-    - Effective use of Vue.js best practices.
+   ```bash
+   npm install
+   ```
 
-4. **Functionality:**
-    - Successful implementation of data display and interaction features.
-    - Implementation of additional features for bonus points (if applicable).
+### Running the Project
 
-5. **Documentation:**
-    - Clear and concise README.md.
-    - Additional documentation or comments within the code as needed.
-    - Clear instructions on how to run it
+1. **Start the Frontend Development Server:**
 
-**Submission:**
+   From root directory:
+   
+   ```bash
+   cd front-end
+   npm run dev
+   ```
 
-Use git and approach making changes to code the same way you would have in a professional environment. 
-Add carls@elmersmfg.com as reviewer on a pull request
+   This will start the development server, and you can view the project at `http://localhost:8000` in your browser.
+
+2. **Start the Backend API:**
+
+   From root directory:
+
+   ```bash
+   docker compose up probable-octo-chainsaw-api
+   ```
+
+3. **Run Unit Tests with [Vitest](https://vitest.dev/):**
+
+   From root directory:
+
+   ```bash
+   cd front-end
+   npm run test:unit
+   ```
+
+   This will run all the vitest unit tests. Make sure the backend is running for all tests to pass. 
+
+4. **Run Docker Container of this application(Front-end & Back-end):**
+   
+   Note: Make sure back-end API is no longer running (```docker compose down probable-octo-chainsaw-api```).
+
+   From root directory:
+   ```bash
+   docker compose up
+   ```
+
+   You can view the docker container on ```localhost:8080```, despite what it prints in the terminal 
+
+### Attribution
+
+**Background Image**:
+Image by Freepik: https://www.freepik.com/free-vector/futuristic-white-technology-background_6402687.htm#query=service%20background&position=0&from_view=keyword&track=ais&uuid=ace85877-e292-47c8-a218-fe7fb065c290'

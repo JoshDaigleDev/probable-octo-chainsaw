@@ -3,9 +3,9 @@
     {
       "name": "list",
       "args": {
-        "count": 5,
+        "count": 26,
         "item": {
-          "name": "John",
+          "name": "Josh",
           "age": 35
         },
         "prop": "data"

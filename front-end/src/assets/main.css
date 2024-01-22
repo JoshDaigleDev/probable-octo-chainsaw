@@ -1,0 +1,31 @@
+body {
+  min-height: 100vh;
+  font-size: 15px;
+  padding: 0px;
+  margin: 0px;
+  background-color: var(--surface-0);
+  background-image: url("./bg-image.jpg");
+  text-rendering: optimizeLegibility;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+//Global override for Primevue ProgressSpinner
+
+@layer primevue {
+  .p-progress-spinner {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+.p-progress-spinner {
+  width: 50px;
+  height: 50px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.p-progress-spinner-circle {
+  stroke: var(--primary-color) !important;
+  stroke-width: 0.4rem;
+}
